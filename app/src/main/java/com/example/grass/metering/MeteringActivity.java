@@ -74,8 +74,10 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     public void onSensorChanged(SensorEvent event) {
         if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
             accelerometerValues = event.values;
+
         if(event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
             magneticFieldValues = event.values;
+
     }
 
     @Override
@@ -85,13 +87,30 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
 
     public float[] getOrientation(){
         float[] values = new float[3];
-        float[] R = new float[9];
-        SensorManager.getRotationMatrix(R, null, accelerometerValues, magneticFieldValues);
-        SensorManager.getOrientation(R, values);
 
-        values[0] = (float) Math.toDegrees(values[0]);
-        values[1] = (float) Math.toDegrees(values[1]);
-        values[2] = (float) Math.toDegrees(values[2]);
+        if(magneticFieldValues !=null) {
+            float[] R = new float[9];
+            SensorManager.getRotationMatrix(R, null, accelerometerValues, magneticFieldValues);
+            SensorManager.getOrientation(R, values);
+
+            values[0] = (float) Math.toDegrees(values[0]);
+            values[1] = (float) Math.toDegrees(values[1]);
+            values[2] = (float) Math.toDegrees(values[2]);
+            Log.d("orientation","orientation 1 "+ values[0]+" " +values[1]+ " " + values[2]);
+        }else {
+            double ax = accelerometerValues[0];
+            double ay = accelerometerValues[1];
+            double az = accelerometerValues[2];
+            double x  = Math.atan(ax/Math.sqrt(ay*ay+az*az));
+            double y  = Math.atan(ay/Math.sqrt(ax*ax+az*az));
+            double z  = Math.atan(az/Math.sqrt(ay*ay+ax*ax));
+
+
+            values[0] = (float) Math.toDegrees(x);
+            values[1] = (float) Math.toDegrees(y);
+            values[2] = (float) Math.toDegrees(z)-90;
+            Log.d("orientation","orientation 2 "+ values[0]+" " +values[1]+ " " + values[2]);
+        }
         return values;
     }
     public boolean checkRotate(float angle){
@@ -139,9 +158,9 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
                 }
                 float[] values = getOrientation();
                 if (checkRotate(values[2])) {
-                    if (values[1] < 0)
+                   // if (values[1] < 0)
                         res = calculateHeight(values[1], height, length);
-                    else res = 0;
+                   // else res = 0;
                     publishProgress(""+Math.round(res));
                 }
             }

@@ -94,7 +94,9 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
         editor.commit();
     }
     private HashMap<String,Double> getData(){
-        if (mSettings.getAll().size() ==0 || mSettings==null)
+        if (mSettings==null)
+            return null;
+        if (mSettings.getAll().size() ==0 )
             return null;
 
         double height   = 0;

@@ -25,8 +25,9 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     private float[] accelerometerValues;
     private float[] magneticFieldValues;
     private ArrayList<Double> angles;
-    private double res = 0.0 ;
+    private double[] task_data;
     TextView heightView;
+    TextView angleView;
 
     MeteringTask task;
 
@@ -43,6 +44,8 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
 
         setContentView(R.layout.activity_metering);
 
+        task_data = new double[]{0,0};
+
         dialog = new MeteringDialog();
         dialog.setMeteringActivity(this);
 
@@ -54,6 +57,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         sensorManager.registerListener(this,magneticField,SensorManager.SENSOR_DELAY_UI);
 
         heightView = (TextView)findViewById(R.id.heightValue);
+        angleView  = (TextView)findViewById(R.id.angleValue);
         angles = new ArrayList<>();
 
         dialog.show(getFragmentManager(),"Налаштування");
@@ -66,8 +70,19 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     }
     @Override
     public void onClick(View v) {
-        stopTask();
-        dialog.show(getFragmentManager(), "Налаштування");
+        switch (v.getId()){
+            case R.id.layer:
+                Log.d("ran","ran");
+                stopTask();
+                break;
+            case R.id.buttonChange:
+                dialog.show(getFragmentManager(), "Налаштування");
+                break;
+            case R.id.buttonUpdate:
+                double[] data = dialog.getParams();
+                startTask(data[0],data[1]);
+                break;
+        }
     }
 
     @Override
@@ -119,18 +134,20 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         }
         return false;
     }
-    public double calculateHeight(float angle,double height,double length){
-        angles.add((double) Math.round(angle));
+    public double[] calculateHeight(double angle,double height,double length){
+        angles.add((double) roundNumber(angle,2));
 
         if(angles.size() == 3) {
-            angle = Math.round(averageAngle());
+            angle = roundNumber(averageAngle(),2);
             double tan = Math.tan(Math.toRadians(Math.abs(angle)));
             double height1 = length * tan;
             Log.d("orientation", "tan = " + tan + " angle = " + angle);
+            task_data[0] = Math.abs(angle);
+            task_data[1] = height+height1;
             angles = new ArrayList<>();
-            return height + height1;
+
         }
-        else return res;
+        return task_data;
     }
     public double averageAngle(){
         double sum = 0;
@@ -139,15 +156,23 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         return sum/angles.size();
     }
 
-    public class MeteringTask extends AsyncTask<Double,String,Void>{
+    public class MeteringTask extends AsyncTask<Double,String,double[]>{
 
         private boolean runFlag =true;
 
         public void stopTask(){
             runFlag = false;
         }
+
         @Override
-        protected Void doInBackground(Double... params) {
+        protected void onPreExecute() {
+            super.onPreExecute();
+            heightView.setText("00.00");
+            angleView.setText ("00.00");
+        }
+
+        @Override
+        protected double[] doInBackground(Double... params) {
             double height = params[0];
             double length = params[1];
             while (runFlag) {
@@ -159,15 +184,23 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
                 float[] values = getOrientation();
                 if (checkRotate(values[2])) {
                    // if (values[1] < 0)
-                        res = calculateHeight(values[1], height, length);
+                        task_data = calculateHeight(values[1], height, length);
                    // else res = 0;
-                    publishProgress(""+Math.round(res));
+                    publishProgress(""+roundNumber(task_data[0],2));
                 }
             }
-            return null;
+            return task_data;
         }
-        protected void onProgressUpdate(String... height) {
-            heightView.setText(height[0]);
+        protected void onProgressUpdate(String... data) {
+            angleView.setText(data[0]);
+        }
+
+        @Override
+        protected void onPostExecute(double[] doubles) {
+            super.onPostExecute(doubles);
+
+            heightView.setText("" + roundNumber(doubles[1],2));
+            angleView.setText ("" + doubles[0]);
         }
     }
 
@@ -176,7 +209,16 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     }
     public void startTask(Double height,Double length){
         task= new MeteringTask();
-        task.execute(height,length);
+        task.execute(height, length);
     }
+
+
+    public double roundNumber(double number , double accurancy){
+        accurancy = Math.pow(10,accurancy);
+        number    = Math.round(number*accurancy);
+
+        return number/accurancy;
+    }
+
 
 }

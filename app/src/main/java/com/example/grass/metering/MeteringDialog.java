@@ -32,6 +32,9 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
     MeteringActivity activity;
     private AlertDialog dialog;
 
+    private double height;
+    private double length;
+
     HashMap<String,Double> map;
 
     public void setMeteringActivity(MeteringActivity activity){
@@ -142,14 +145,21 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
     public void onClick(View v) {
         int lid    = radioGroup.getCheckedRadioButtonId();
         int length = getLength(radioGroup.getCheckedRadioButtonId());
-        float height = 2;
+        double height = 1.9;
         try {
-            height = Float.parseFloat(editText.getText().toString());
+            height = Double.parseDouble(editText.getText().toString());
         }catch (Exception e){
 
         }
-            saveData(lid,length,height);
-        activity.startTask((double)height, (double) length);
+            saveData(lid,length,new Float(""+height));
+        activity.startTask(height, (double) length);
+        this.length = length;
+        this.height = height;
+
         dialog.dismiss();
+    }
+
+    public double[] getParams(){
+        return new double[]{height,length};
     }
 }

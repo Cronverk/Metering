@@ -16,9 +16,9 @@
     <com.example.grass.metering2.VerticalTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Висотомip без базисний"
+        android:text="Висотомip базисний"
         android:id="@+id/textView6"
-        android:textSize="35dp"
+        android:textSize="50dp"
         android:textColor="#ffffff"
         android:gravity="top|bottom"
         android:layout_marginRight="87dp"

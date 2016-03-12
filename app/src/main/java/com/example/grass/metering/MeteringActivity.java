@@ -16,7 +16,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -46,13 +45,12 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
 
     Sensor accelerometer;
     Sensor magneticField;
-    private double zy_angle;
-    Display display;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        checkDate();
 
         setContentView(R.layout.activity_metering);
 
@@ -75,6 +73,8 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         dialog.show(getFragmentManager(),"Налаштування");
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+
     }
 
     boolean checkDate(){

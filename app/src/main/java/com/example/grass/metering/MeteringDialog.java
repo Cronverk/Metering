@@ -13,11 +13,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import ua.com.lesovod.taxation.R;
 
 /**
  * Created by Grass on 10.03.2016.
@@ -145,18 +145,20 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
     public void onClick(View v) {
         int lid    = radioGroup.getCheckedRadioButtonId();
         int length = getLength(radioGroup.getCheckedRadioButtonId());
-        double height = 1.9;
+        double height = 0;
         try {
             height = Double.parseDouble(editText.getText().toString());
         }catch (Exception e){
 
         }
-            saveData(lid,length,new Float(""+height));
-        activity.startTask(height, (double) length);
-        this.length = length;
-        this.height = height;
-
-        dialog.dismiss();
+        if (height!=0) {
+            saveData(lid, length, new Float("" + height));
+            activity.startTask(height, (double) length);
+            this.length = length;
+            this.height = height;
+            dialog.dismiss();
+            Toast.makeText(getActivity().getApplicationContext(),"Значення має бути більше нуля",Toast.LENGTH_LONG);
+        }
     }
 
     public double[] getParams(){

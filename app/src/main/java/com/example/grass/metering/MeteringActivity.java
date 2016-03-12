@@ -12,11 +12,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ua.com.lesovod.taxation.R;
 
 public class MeteringActivity extends Activity implements View.OnClickListener, SensorEventListener {
     MeteringDialog dialog;
@@ -61,6 +61,8 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         angles = new ArrayList<>();
 
         dialog.show(getFragmentManager(),"Налаштування");
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
@@ -135,6 +137,9 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         return false;
     }
     public double[] calculateHeight(double angle,double height,double length){
+        if(angle>0)
+            angles.add((double) 0);
+        else
         angles.add((double) roundNumber(angle,2));
 
         if(angles.size() == 3) {

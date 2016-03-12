@@ -2,23 +2,35 @@ package com.example.grass.metering;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.example.grass.metering.validation.MyValidator;
+import com.example.grass.metering.validation.ValidationCallback;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import static com.example.grass.metering.Constants.*;
 
 
-public class MeteringActivity extends Activity implements View.OnClickListener, SensorEventListener {
+public class MeteringActivity extends Activity implements View.OnClickListener, SensorEventListener, ValidationCallback {
     MeteringDialog dialog;
     SensorManager sensorManager;
 
@@ -63,6 +75,27 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         dialog.show(getFragmentManager(),"Налаштування");
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    }
+
+    boolean checkDate(){
+
+        SharedPreferences preferences = getSharedPreferences("my_settings" , MODE_PRIVATE);
+
+        long timeX = preferences.getLong("dayD",0) - Calendar.getInstance().getTimeInMillis();
+
+        Log.d(TAG, "checkDateDiff: " + " timeX" + timeX/(24*60*60*1000));
+        if (timeX > 0 ){
+            Log.d(TAG, "checkDate() returned: " + true);
+            return true;
+
+        }
+        else {
+            Log.d(TAG, "checkDate() returned: " + false);
+            MyValidator val = new MyValidator(getApplicationContext(),this);
+            val.execute();
+            return preferences.getBoolean(VAL, false);
+        }
+
     }
 
     @Override
@@ -223,6 +256,53 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         number    = Math.round(number*accurancy);
 
         return number/accurancy;
+    }
+
+    public void showDiatog(){
+        TelephonyManager manager = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+        String imei = manager.getDeviceId();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Незареєстрована копія")
+                .setMessage("Для покупки перейдіть на сайт видавця та повідомте цей номер " + imei + ".")
+                .setCancelable(false);
+        builder.setNegativeButton("Відмова", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.setPositiveButton("На сайт", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.lesovod.com.ua"));
+                startActivity(browserIntent);
+            }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                finish();
+            }
+        });
+        AlertDialog dialog = builder.create();
+
+
+        dialog.show();
+    }
+
+    @Override
+    public void valid(Boolean valid) {
+
+        if (valid){
+            SharedPreferences preferences = getSharedPreferences("my_settings" , MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean(Constants.VAL,true);
+            editor.apply();
+
+        }else{
+            showDiatog();
+        }
     }
 
 

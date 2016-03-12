@@ -64,7 +64,7 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
 
         mSettings = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        LayoutInflater inflater = (LayoutInflater) getActivity().getLayoutInflater();
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
 
@@ -107,9 +107,9 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
         double   id     = 0;
 
         Map map = mSettings.getAll();
-        height  = new Double(""+map.get("height"));
-        length  = new Double(""+map.get("length"));
-        id      = new Double(""+ map.get("id"));
+        height  = Double.valueOf(""+map.get("height"));
+        length  = Double.valueOf(""+map.get("length"));
+        id      = Double.valueOf(""+ map.get("id"));
 
         HashMap<String,Double> data = null;
         if(height != 0 && length !=0 ) {
@@ -152,12 +152,12 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
 
         }
         if (height!=0) {
-            saveData(lid, length, new Float("" + height));
+            saveData(lid, length, Float.valueOf("" + height));
             activity.startTask(height, (double) length);
             this.length = length;
             this.height = height;
             dialog.dismiss();
-            Toast.makeText(getActivity().getApplicationContext(),"Значення має бути більше нуля",Toast.LENGTH_LONG);
+            Toast.makeText(getActivity().getApplicationContext(),"Значення має бути більше нуля",Toast.LENGTH_LONG).show();
         }
     }
 

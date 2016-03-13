@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -26,11 +25,12 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
 
     public static final String APP_PREFERENCES = "meteringData";
     private SharedPreferences mSettings;
-    private RadioGroup radioGroup;
     private EditText editText;
     private View view;
     MeteringActivity activity;
     private AlertDialog dialog;
+    Button button20;
+    Button button30;
 
     private double height;
     private double length;
@@ -54,7 +54,7 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
         if(map!=null) {
             editText.setText("" + map.get("height"));
             double id = map.get("id");
-            radioGroup.check((int) id);
+            check((int) id);
         }
     }
 
@@ -72,7 +72,13 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
         builder.setView(view);
 
         editText   = (EditText)   view.findViewById(R.id.editHeight);
-        radioGroup = (RadioGroup) view.findViewById(R.id.radioHeight);
+
+        button20   = (Button)     view.findViewById(R.id.button20);
+        button30   = (Button)     view.findViewById(R.id.button30);
+
+        button20.setOnClickListener(this);
+        button30.setOnClickListener(this);
+
         Button button = (Button) view.findViewById(R.id.buttonOk);
         button.setOnClickListener(this);
 
@@ -123,10 +129,10 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
     private int getLength(int id){
         int value = 0 ;
         switch (id){
-            case R.id.radioButton1:
+            case R.id.button20:
                 value =  20;
                 break;
-            case  R.id.radioButton2:
+            case  R.id.button30:
                 value =  30;
                 break;
         }
@@ -143,25 +149,55 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        int lid    = radioGroup.getCheckedRadioButtonId();
-        int length = getLength(radioGroup.getCheckedRadioButtonId());
-        double height = 0;
-        try {
-            height = Double.parseDouble(editText.getText().toString());
-        }catch (Exception e){
 
-        }
-        if (height!=0) {
-            saveData(lid, length, Float.valueOf("" + height));
-            activity.startTask(height, (double) length);
-            this.length = length;
-            this.height = height;
-            dialog.dismiss();
-            Toast.makeText(getActivity().getApplicationContext(),"Значення має бути більше нуля",Toast.LENGTH_LONG).show();
+        switch (v.getId()) {
+            case R.id.buttonOk: {
+                int lid = getCheck();
+                int length = getLength(lid);
+                double height = 0;
+                try {
+                    height = Double.parseDouble(editText.getText().toString());
+                } catch (Exception e) {
+
+                }
+                if (height != 0) {
+                    saveData(lid, length, Float.valueOf("" + height));
+                    activity.startTask(height, (double) length);
+                    this.length = length;
+                    this.height = height;
+                    dialog.dismiss();
+                    Toast.makeText(getActivity().getApplicationContext(), "Значення має бути більше нуля", Toast.LENGTH_LONG).show();
+                }
+            }
+            break;
+            case R.id.button20:
+                check(R.id.button20);
+                break;
+            case R.id.button30:
+                check(R.id.button30);
+                break;
         }
     }
 
     public double[] getParams(){
         return new double[]{height,length};
+    }
+
+    public void check(int id){
+        button20.setEnabled(true);
+        button30.setEnabled(true);
+        switch (id){
+            case R.id.button20:
+                button20.setEnabled(false);
+                break;
+            case R.id.button30:
+                button30.setEnabled(false);
+                break;
+        }
+    }
+    public int getCheck(){
+        if(!button20.isEnabled())
+            return R.id.button20;
+        return R.id.button30;
     }
 }

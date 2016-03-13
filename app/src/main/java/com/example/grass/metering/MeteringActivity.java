@@ -56,7 +56,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        checkDate();
+       // checkDate();
 
         setContentView(R.layout.activity_metering2);
 
@@ -187,7 +187,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     }
 
     public double[] calculateHeight(double angle, double height, double length) {
-        if (angle > 0)
+        if (angle < 0)
             angles.add((double) 0);
         else
             angles.add((double) roundNumber(angle, 2));
@@ -246,9 +246,10 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
                 }
                 float[] values = getOrientation();
                 if (checkRotate(values[2])) {
-                    // if (values[1] < 0)
-                    task_data = calculateHeight(values[1], height, length);
-                    // else res = 0;
+                    Log.d("ff",""+values[1]);
+                     if (values[1] > 0)
+                        task_data = calculateHeight(values[1], height, length);
+                    //else task_data = calculateHeight(0, height, length);
                     publishProgress("" + roundNumber(task_data[0], 2));
                 }
             }

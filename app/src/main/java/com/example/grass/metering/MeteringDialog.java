@@ -79,9 +79,6 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
         button20.setOnClickListener(this);
         button30.setOnClickListener(this);
 
-        Button button = (Button) view.findViewById(R.id.buttonOk);
-        button.setOnClickListener(this);
-
         dialog     = builder.create();
         setViews();
 
@@ -149,27 +146,7 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
-            case R.id.buttonOk: {
-                int lid = getCheck();
-                int length = getLength(lid);
-                double height = 0;
-                try {
-                    height = Double.parseDouble(editText.getText().toString());
-                } catch (Exception e) {
-
-                }
-                if (height != 0) {
-                    saveData(lid, length, Float.valueOf("" + height));
-                    activity.startTask(height, (double) length);
-                    this.length = length;
-                    this.height = height;
-                    dialog.dismiss();
-                    Toast.makeText(getActivity().getApplicationContext(), "Значення має бути більше нуля", Toast.LENGTH_LONG).show();
-                }
-            }
-            break;
             case R.id.button20:
                 check(R.id.button20);
                 break;
@@ -177,6 +154,25 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
                 check(R.id.button30);
                 break;
         }
+
+        int lid = getCheck();
+        int length = getLength(lid);
+        double height = 0;
+        try {
+            height = Double.parseDouble(editText.getText().toString());
+        } catch (Exception e) {
+
+        }
+        if (height != 0) {
+            saveData(lid, length, Float.valueOf("" + height));
+            activity.startTask(height, (double) length);
+            this.length = length;
+            this.height = height;
+            dialog.dismiss();
+         //   Toast.makeText(getActivity().getApplicationContext(), "Значення має бути більше нуля", Toast.LENGTH_LONG).show();
+        }
+
+
     }
 
     public double[] getParams(){

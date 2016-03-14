@@ -129,8 +129,13 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
                 dialog.show(getFragmentManager(), "Налаштування");
                 break;
             case R.id.buttonUpdate:
-                double[] data = dialog.getParams();
-                startTask(data[0], data[1]);
+                try {
+                    stopTask();
+                    double[] data = dialog.getParams();
+                    startTask(data[0], data[1]);
+                }catch (Exception e){
+
+                }
                 break;
         }
     }

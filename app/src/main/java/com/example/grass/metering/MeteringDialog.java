@@ -54,7 +54,7 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
         if(map!=null) {
             editText.setText("" + map.get("height"));
             double id = map.get("id");
-            check((int) id);
+          //  check((int) id);
         }
     }
 
@@ -146,6 +146,7 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        /*
         switch (v.getId()) {
             case R.id.button20:
                 check(R.id.button20);
@@ -154,7 +155,7 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
                 check(R.id.button30);
                 break;
         }
-
+*/
         int lid = getCheck();
         int length = getLength(lid);
         double height = 0;

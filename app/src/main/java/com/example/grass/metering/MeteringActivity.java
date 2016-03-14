@@ -157,7 +157,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
 
     public float[] getOrientation() {
         float[] values = new float[3];
-
+/*
         if (magneticFieldValues != null) {
             float[] R = new float[9];
             SensorManager.getRotationMatrix(R, null, accelerometerValues, magneticFieldValues);
@@ -167,7 +167,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
             values[1] = (float) Math.toDegrees(values[1]);
             values[2] = (float) Math.toDegrees(values[2]);
             Log.d("orientation", "orientation 1 " + values[0] + " " + values[1] + " " + values[2]);
-        } else {
+        } else {*/
             double ax = accelerometerValues[0];
             double ay = accelerometerValues[1];
             double az = accelerometerValues[2];
@@ -180,7 +180,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
             values[1] = (float) Math.toDegrees(y);
             values[2] = (float) Math.toDegrees(z) - 90;
             Log.d("orientation", "orientation 2 " + values[0] + " " + values[1] + " " + values[2]);
-        }
+     //   }
         return values;
     }
 
@@ -252,7 +252,8 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
                 float[] values = getOrientation();
                 if (checkRotate(values[2])) {
                     Log.d("ff",""+values[1]);
-                     if (values[0]*values[1] > 0)
+                    // if (values[0]*values[1] > 0)
+                    if (values[1] > 0)
                         task_data = calculateHeight(values[1], height, length);
                     else task_data = calculateHeight(0, height, length);
                     publishProgress("" + roundNumber(task_data[0], 2));

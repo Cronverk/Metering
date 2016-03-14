@@ -31,7 +31,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20 метрiв"
+        android:text="@string/togle1_str"
         android:id="@+id/button20"
         android:textSize="35dp"
         style="@style/AlertDialog.AppCompat"
@@ -42,7 +42,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="30 метрiв"
+        android:text="@string/togle2_str"
         android:id="@+id/button30"
         android:textSize="35dp"
         style="@style/AlertDialog.AppCompat"

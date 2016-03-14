@@ -11,13 +11,13 @@
         android:text="@string/dialog_title"
         android:id="@+id/textView5"
         android:layout_gravity="center_horizontal"
-        android:textSize="70dp"
+        android:textSize="40dp"
         android:gravity="center_vertical|center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:layout_width="500dp"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/togle1_str"
         android:id="@+id/button20"
-        android:textSize="70dp"
+        android:textSize="40dp"
         style="@style/AlertDialog.AppCompat"
         android:visibility="visible"
         android:layout_below="@+id/editHeight"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:text="@string/togle2_str"
         android:id="@+id/button30"
-        android:textSize="70dp"
+        android:textSize="40dp"
         style="@style/AlertDialog.AppCompat"
         android:visibility="visible"
         android:layout_below="@+id/button20"

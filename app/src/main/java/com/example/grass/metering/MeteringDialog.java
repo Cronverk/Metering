@@ -79,7 +79,7 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
         button20.setOnClickListener(this);
         button30.setOnClickListener(this);
 
-        dialog     = builder.create();
+        dialog     = builder.create(); 
         setViews();
 
         return dialog;

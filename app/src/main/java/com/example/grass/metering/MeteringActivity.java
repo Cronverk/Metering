@@ -192,9 +192,9 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     }
 
     public double[] calculateHeight(double angle, double height, double length) {
-        if (angle < 0)
-            angles.add((double) 0);
-        else
+      //  if (angle < 0)
+       //     angles.add((double) 0);
+       // else
             angles.add((double) roundNumber(angle, 2));
 
         if (angles.size() == 3) {
@@ -252,9 +252,9 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
                 float[] values = getOrientation();
                 if (checkRotate(values[2])) {
                     Log.d("ff",""+values[1]);
-                     if (values[1] > 0)
+                     if (values[0]*values[1] > 0)
                         task_data = calculateHeight(values[1], height, length);
-                    //else task_data = calculateHeight(0, height, length);
+                    else task_data = calculateHeight(0, height, length);
                     publishProgress("" + roundNumber(task_data[0], 2));
                 }
             }

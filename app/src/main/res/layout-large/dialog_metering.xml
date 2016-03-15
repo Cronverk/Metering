@@ -11,45 +11,88 @@
         android:text="@string/dialog_title"
         android:id="@+id/textView5"
         android:layout_gravity="center_horizontal"
-        android:textSize="40dp"
+        android:textSize="30dp"
         android:gravity="center_vertical|center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:layout_width="400dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="numberSigned|numberDecimal"
         android:ems="10"
         android:id="@+id/editHeight"
-        android:textSize="70dp"
+        android:textSize="30dp"
         android:focusable="true"
         android:visibility="visible"
         android:layout_below="@+id/textView5"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:text="@string/togle1_str"
         android:id="@+id/button20"
-        android:textSize="40dp"
+        android:textSize="30dp"
         style="@style/AlertDialog.AppCompat"
         android:visibility="visible"
         android:layout_below="@+id/editHeight"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:text="@string/togle2_str"
         android:id="@+id/button30"
-        android:textSize="40dp"
+        android:textSize="30dp"
         style="@style/AlertDialog.AppCompat"
         android:visibility="visible"
         android:layout_below="@+id/button20"
         android:layout_alignLeft="@+id/button20"
         android:layout_alignStart="@+id/button20" />
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/button30"
+        android:layout_centerHorizontal="true"
+        android:weightSum="1"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/editOwnValue"
+            android:layout_width="302dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/editHeight"
+            android:layout_alignLeft="@+id/button20"
+            android:layout_alignStart="@+id/button20"
+            android:layout_gravity="center_horizontal"
+            android:textSize="30dp"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/buttSaveOwn"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:text="Розрахувати"
+            android:layout_gravity="center_horizontal"
+            android:textSize="30dp"
+            style="@style/AlertDialog.AppCompat" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttOwnResult"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:text="Власне значення"
+        android:visibility="visible"
+        style="@style/AlertDialog.AppCompat"
+        android:textSize="30dp"
+        android:layout_below="@+id/button30"
+        android:layout_alignLeft="@+id/button30"
+        android:layout_alignStart="@+id/button30" />
 
 
 </RelativeLayout>

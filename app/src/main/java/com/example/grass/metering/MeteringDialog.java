@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -31,6 +32,9 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
     private AlertDialog dialog;
     Button button20;
     Button button30;
+    Button buttOwn;
+    Button saveButton;
+
 
     private double height;
     private double length;
@@ -75,9 +79,13 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
 
         button20   = (Button)     view.findViewById(R.id.button20);
         button30   = (Button)     view.findViewById(R.id.button30);
+        buttOwn    = (Button)     view.findViewById(R.id.buttOwnResult);
+        saveButton = (Button)     view.findViewById(R.id.buttSaveOwn);
 
         button20.setOnClickListener(this);
         button30.setOnClickListener(this);
+        buttOwn.setOnClickListener(this);
+        saveButton.setOnClickListener(this);
 
         dialog     = builder.create(); 
         setViews();
@@ -146,34 +154,54 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        /*
         switch (v.getId()) {
-            case R.id.button20:
-                check(R.id.button20);
+            default: {
+                int lid = getCheck();
+                int length = getLength(lid);
+                height  =0;
+                try {
+                    height = Double.parseDouble(editText.getText().toString());
+                }catch(Exception e){}
+
+
+                if (height != 0) {
+                    saveData(lid, length, height);
+                    dialog.dismiss();
+                }
+            }
+            break;
+            case R.id.buttOwnResult:
+                buttOwn.setVisibility(View.GONE);
+
+                LinearLayout layout = (LinearLayout)view.findViewById(R.id.layout);
+                layout.setVisibility(View.VISIBLE);
+            break;
+            case R.id.buttSaveOwn:
+
+                LinearLayout layout2 = (LinearLayout)view.findViewById(R.id.layout);
+                EditText text = (EditText)view.findViewById(R.id.editOwnValue);
+                int lid =R.id.buttSaveOwn;
+                int length = 0 ;
+                double height = 0 ;
+                try {
+                    length = Integer.parseInt(text.getText().toString());
+                    height = Double.parseDouble(editText.getText().toString());
+                }catch (Exception e){}
+                if (height != 0 &&length!=0) {
+                    saveData(lid, length, height);
+
+                    layout2.setVisibility(View.GONE);
+                    dialog.dismiss();
+                }
                 break;
-            case R.id.button30:
-                check(R.id.button30);
-                break;
         }
-*/
-        int lid = getCheck();
-        int length = getLength(lid);
-        double height = 0;
-        try {
-            height = Double.parseDouble(editText.getText().toString());
-        } catch (Exception e) {
+    }
 
-        }
-        if (height != 0) {
-            saveData(lid, length, Float.valueOf("" + height));
-            activity.startTask(height, (double) length);
-            this.length = length;
-            this.height = height;
-            dialog.dismiss();
-         //   Toast.makeText(getActivity().getApplicationContext(), "Значення має бути більше нуля", Toast.LENGTH_LONG).show();
-        }
-
-
+    public void saveData(int lid,int length,double height){
+        saveData(lid, length, Float.valueOf("" + height));
+        activity.startTask(height, (double) length);
+        this.length = length;
+        this.height = height;
     }
 
     public double[] getParams(){

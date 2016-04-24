@@ -56,6 +56,12 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        double angle = roundNumber(59, 2);
+        double tan = Math.tan(Math.toRadians(Math.abs(angle)));
+
+
+
        // checkDate();
 
         setContentView(R.layout.activity_metering2);
@@ -201,7 +207,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
             angle = roundNumber(averageAngle(), 2);
             double tan = Math.tan(Math.toRadians(Math.abs(angle)));
             double height1 = length * tan;
-            Log.d("orientation", "tan = " + tan + " angle = " + angle);
+            Log.d("orientation", "tan = " + tan + " height1 = " + height1+" lenght = "+length);
             task_data[0] = Math.abs(angle);
             task_data[1] = height + height1;
             angles = new ArrayList<>();

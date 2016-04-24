@@ -156,7 +156,7 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             default: {
-                int lid = getCheck();
+                int lid = getCheck(v.getId());
                 int length = getLength(lid);
                 height  =0;
                 try {
@@ -220,8 +220,8 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
                 break;
         }
     }
-    public int getCheck(){
-        if(!button20.isEnabled())
+    public int getCheck(int id){
+        if(id == R.id.button20)
             return R.id.button20;
         return R.id.button30;
     }

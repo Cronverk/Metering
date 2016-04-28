@@ -1,4 +1,4 @@
-package com.example.grass.metering2;
+package com.example.grass.metering;
 
 import android.content.Context;
 import android.content.res.TypedArray;

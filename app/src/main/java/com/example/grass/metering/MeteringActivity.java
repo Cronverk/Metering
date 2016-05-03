@@ -38,7 +38,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     SensorManager sensorManager;
 
     private float[] accelerometerValues;
-    private float[] magneticFieldValues;
+    //private float[] magneticFieldValues;
     private ArrayList<Double> angles;
     private double[] task_data;
     TextView heightView;
@@ -48,19 +48,13 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
 
 
     Sensor accelerometer;
-    Sensor magneticField;
+    //Sensor magneticField;
     SoundPool sp;
     int sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        double angle = roundNumber(59, 2);
-        double tan = Math.tan(Math.toRadians(Math.abs(angle)));
-
-
 
        // checkDate();
 
@@ -82,10 +76,10 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); // Получаем менеджер сенсоров
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        magneticField = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        //magneticField = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
-        sensorManager.registerListener(this, magneticField, SensorManager.SENSOR_DELAY_UI);
+        //sensorManager.registerListener(this, magneticField, SensorManager.SENSOR_DELAY_UI);
 
         heightView = (TextView) findViewById(R.id.heightValue);
         angleView = (TextView) findViewById(R.id.angleValue);
@@ -151,8 +145,8 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
             accelerometerValues = event.values;
 
-        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
-            magneticFieldValues = event.values;
+        //if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
+        //    magneticFieldValues = event.values;
 
     }
 
@@ -209,7 +203,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
             double height1 = length * tan;
             Log.d("orientation", "tan = " + tan + " height1 = " + height1+" lenght = "+length);
             task_data[0] = Math.abs(angle);
-            task_data[1] = height + height1;
+            task_data[1] = roundNumber(height + height1,1);
             angles = new ArrayList<>();
 
         }

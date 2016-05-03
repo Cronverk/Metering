@@ -136,5 +136,13 @@
             android:textSize="30dp"
             style="@style/AlertDialog.AppCompat" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/abc_ic_ab_back_material"
+        android:layout_below="@+id/heightValue"
+        android:layout_alignRight="@+id/heightValue"
+        android:layout_alignEnd="@+id/heightValue" />
 
 </RelativeLayout>

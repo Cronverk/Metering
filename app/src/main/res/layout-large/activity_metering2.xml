@@ -6,6 +6,15 @@
     tools:context=".metering.MeteringActivity"
     android:onClick="onClick">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/imageView2"
+        android:src="@mipmap/arrow"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/heightValue"
+        android:layout_alignEnd="@+id/heightValue" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/heightValue"
-        android:textSize="140dp"
+        android:textSize="120dp"
         android:text="00.00"
         android:layout_below="@+id/textView10"
         android:layout_alignParentRight="true"
@@ -34,10 +43,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/angle_str"
+        android:text="Вертикальний Кут "
         android:id="@+id/textView"
         android:textSize="50dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/imageView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -47,7 +56,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="00.00"
         android:id="@+id/angleValue"
-        android:textSize="140dp"
+        android:textSize="120dp"
         android:layout_below="@+id/textView"
         android:layout_alignLeft="@+id/layer"
         android:layout_alignStart="@+id/layer" />
@@ -69,7 +78,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="m"
         android:id="@+id/textView3"
-        android:textSize="50dp"
+        android:textSize="35dp"
         android:layout_alignTop="@+id/heightValue"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -79,7 +88,10 @@
         android:layout_height="match_parent"
         android:onClick="onClick"
         android:visibility="visible"
-        android:id="@+id/layer">
+        android:id="@+id/layer"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <Button
             android:layout_width="match_parent"
@@ -136,13 +148,4 @@
             android:textSize="30dp"
             style="@style/AlertDialog.AppCompat" />
     </LinearLayout>
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageView2"
-        android:src="@drawable/abc_ic_ab_back_material"
-        android:layout_below="@+id/heightValue"
-        android:layout_alignRight="@+id/heightValue"
-        android:layout_alignEnd="@+id/heightValue" />
-
 </RelativeLayout>

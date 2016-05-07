@@ -20,6 +20,7 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.grass.metering.validation.MyValidator;
@@ -115,7 +116,6 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
@@ -237,6 +237,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
             super.onPreExecute();
             heightView.setText("00.00");
             angleView.setText("00.00");
+            enableButtons(false);
         }
 
         @Override
@@ -274,6 +275,7 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
             angleView.setText("" + doubles[0]);
 
             sp.play(sound, 1, 1, 0, 0, 1);
+            enableButtons(true);
         }
     }
 
@@ -282,10 +284,18 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     }
 
     public void startTask(Double height, Double length) {
+
         task = new MeteringTask();
         task.execute(height, length);
+
     }
 
+    private void enableButtons(boolean status){
+        Button b = (Button)findViewById(R.id.buttonChange);
+        b.setEnabled(status);
+        b =(Button)findViewById(R.id.buttonUpdate);
+        b.setEnabled(status);
+    }
 
     public double roundNumber(double number, double accurancy) {
         accurancy = Math.pow(10, accurancy);

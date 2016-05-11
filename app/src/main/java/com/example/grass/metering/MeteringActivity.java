@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -17,10 +18,15 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.text.Layout;
 import android.util.Log;
+import android.view.OrientationEventListener;
+import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.grass.metering.validation.MyValidator;
@@ -218,12 +224,6 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     }
 
 
-
-    @Override
-    public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-
-    }
-
     public class MeteringTask extends AsyncTask<Double, String, double[]> {
 
         private boolean runFlag = true;
@@ -275,6 +275,9 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
             angleView.setText("" + doubles[0]);
 
             sp.play(sound, 1, 1, 0, 0, 1);
+
+
+
             enableButtons(true);
         }
     }
@@ -295,6 +298,14 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         b.setEnabled(status);
         b =(Button)findViewById(R.id.buttonUpdate);
         b.setEnabled(status);
+        if(status){
+            RelativeLayout layer = (RelativeLayout) findViewById(R.id.layer);
+            layer.setVisibility(View.GONE);
+        }
+        else{
+            RelativeLayout layer = (RelativeLayout) findViewById(R.id.layer);
+            layer.setVisibility(View.VISIBLE);
+        }
     }
 
     public double roundNumber(double number, double accurancy) {
@@ -352,4 +363,9 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     }
 
 
+
+    @Override
+    public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+
+    }
 }

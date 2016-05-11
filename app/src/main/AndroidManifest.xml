@@ -13,11 +13,11 @@
             android:supportsRtl="true"
             android:theme="@style/Base.Theme.AppCompat.Light">
             <activity android:name=".MeteringActivity"
-                android:screenOrientation="landscape">
+                android:screenOrientation="reverseLandscape">
             </activity>
 
             <activity android:name=".Splash"
-                android:screenOrientation="landscape">
+                android:screenOrientation="reverseLandscape">
 
                 <intent-filter>
 

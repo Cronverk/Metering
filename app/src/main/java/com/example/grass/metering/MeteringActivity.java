@@ -1,7 +1,6 @@
 package com.example.grass.metering;
 
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,9 +16,13 @@ import android.media.SoundPool;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.View;
@@ -29,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.grass.metering.calibration.CalibrationActivity;
 import com.example.grass.metering.validation.MyValidator;
 import com.example.grass.metering.validation.ValidationCallback;
 
@@ -39,13 +43,13 @@ import java.util.Calendar;
 import static com.example.grass.metering.Constants.*;
 
 
-public class MeteringActivity extends Activity implements View.OnClickListener, SensorEventListener,
+public class MeteringActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener,
         ValidationCallback, SoundPool.OnLoadCompleteListener {
     MeteringDialog dialog;
     SensorManager sensorManager;
+    SharedPreferences spAccurate;
 
     private float[] accelerometerValues;
-    //private float[] magneticFieldValues;
     private ArrayList<Double> angles;
     private double[] task_data;
     TextView heightView;
@@ -55,17 +59,19 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
 
 
     Sensor accelerometer;
-    //Sensor magneticField;
     SoundPool sp;
     int sound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-       // checkDate();
-
         setContentView(R.layout.activity_metering2);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        spAccurate = getSharedPreferences("ACCURATE", MODE_PRIVATE);
+
 
         sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         sp.setOnLoadCompleteListener(this);
@@ -83,10 +89,8 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE); // Получаем менеджер сенсоров
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        //magneticField = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
         sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
-        //sensorManager.registerListener(this, magneticField, SensorManager.SENSOR_DELAY_UI);
 
         heightView = (TextView) findViewById(R.id.heightValue);
         angleView = (TextView) findViewById(R.id.angleValue);
@@ -150,10 +154,6 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
             accelerometerValues = event.values;
-
-        //if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
-        //    magneticFieldValues = event.values;
-
     }
 
     @Override
@@ -163,17 +163,6 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
 
     public float[] getOrientation() {
         float[] values = new float[3];
-/*
-        if (magneticFieldValues != null) {
-            float[] R = new float[9];
-            SensorManager.getRotationMatrix(R, null, accelerometerValues, magneticFieldValues);
-            SensorManager.getOrientation(R, values);
-
-            values[0] = (float) Math.toDegrees(values[0]);
-            values[1] = (float) Math.toDegrees(values[1]);
-            values[2] = (float) Math.toDegrees(values[2]);
-            Log.d("orientation", "orientation 1 " + values[0] + " " + values[1] + " " + values[2]);
-        } else {*/
             double ax = accelerometerValues[0];
             double ay = accelerometerValues[1];
             double az = accelerometerValues[2];
@@ -186,7 +175,6 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
             values[1] = (float) Math.toDegrees(y);
             values[2] = (float) Math.toDegrees(z) - 90;
             Log.d("orientation", "orientation 2 " + values[0] + " " + values[1] + " " + values[2]);
-     //   }
         return values;
     }
 
@@ -198,9 +186,6 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     }
 
     public double[] calculateHeight(double angle, double height, double length) {
-      //  if (angle < 0)
-       //     angles.add((double) 0);
-       // else
             angles.add((double) roundNumber(angle, 2));
 
         if (angles.size() == 3) {
@@ -253,7 +238,6 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
                 float[] values = getOrientation();
                 if (checkRotate(values[2])) {
                     Log.d("ff",""+values[1]);
-                    // if (values[0]*values[1] > 0)
                     if (values[1] > 0)
                         task_data = calculateHeight(values[1], height, length);
                     else task_data = calculateHeight(0, height, length);
@@ -271,12 +255,17 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
         protected void onPostExecute(double[] doubles) {
             super.onPostExecute(doubles);
 
-            heightView.setText("" + roundNumber(doubles[1], 2));
+            double accurate  = 0;
+            if((spAccurate.contains("accurate"))==true) {
+                accurate = Double.parseDouble(spAccurate.getString("accurate", "0"));
+                Log.d("accurate",""+accurate);
+            }
+
+
+            heightView.setText("" + roundNumber(doubles[1]+accurate, 1));
             angleView.setText("" + doubles[0]);
 
             sp.play(sound, 1, 1, 0, 0, 1);
-
-
 
             enableButtons(true);
         }
@@ -367,5 +356,28 @@ public class MeteringActivity extends Activity implements View.OnClickListener, 
     @Override
     public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id == R.id.action_calibration) {
+            SharedPreferences.Editor editor = spAccurate.edit();
+            editor.clear();
+            editor.commit();
+            stopTask();
+
+            Intent intent = new Intent(this, CalibrationActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

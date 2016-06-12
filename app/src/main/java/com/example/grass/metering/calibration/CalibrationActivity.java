@@ -65,6 +65,12 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
                 Intent intent = new Intent(this, VysCalibrActivity.class);
                 startActivityForResult(intent,1);
                 break;
+            case R.id.button2:
+                SharedPreferences.Editor editor = spAccurate.edit();
+                editor.clear();
+                editor.commit();
+                finish();
+                break;
         }
     }
 

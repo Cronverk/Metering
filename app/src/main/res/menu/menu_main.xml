@@ -6,4 +6,8 @@
         android:id="@+id/action_calibration"
         android:title="@string/action_calibration"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_help"
+        android:title="@string/action_help"
+        app:showAsAction="never" />
 </menu>

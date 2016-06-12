@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Висотомір базисний</string>
     <string name="action_calibration">Калібрування</string>
+    <string name="action_help">Правила вимiрювання</string>
     <string name="angle_str">Вертикальний Кут</string>
     <string name="dialog_title">Відстань до рiвня очей</string>
     <string name="dial_str1">Відстань до дерева</string>
@@ -13,4 +14,15 @@
     <string name="line4">тел.<u>0572-94-96-42</u></string>
     <string name="line5"><u>050-400-83-41</u></string>
     <string name="line6"><u>097-529-67-78</u></string>
+
+    <string name="calc_help1">1. Ввести вiдстань до очей</string>
+    <string name="calc_help2">2. Вибрати свою базисну вiдстань,а бо вiдстань заданну за замовченням</string>
+    <string name="calc_help3">3. Проводити замiр увздовж стрiлки</string>
+    <string name="calc_help4">4. Натиснути на екран пристрою, для отримання результату вимiрювання</string>
+
+    <string name="calib_help1">1. У правому верхньому кутку вибрати меню Калiбрування</string>
+    <string name="calib_help2">2. Шоб додати значення калiбровки, треба натиснути кнопку - Додати калiбрування,та виконувти наступнi кроки оисанны у пунктi вимiравння  </string>
+    <string name="calib_help3">3. Щоб убрати калiбрувальнi даннi, треба натиснути кнопку - Сбросити вимiрювання</string>
+
+
 </resources>

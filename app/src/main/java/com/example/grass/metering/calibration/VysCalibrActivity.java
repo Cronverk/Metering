@@ -190,7 +190,7 @@ public class VysCalibrActivity extends Activity implements View.OnClickListener,
                     if (values[1] > 0)
                         task_data = calculateHeight(values[1], length);
                     else task_data = calculateHeight(0, length);
-                    publishProgress("" + roundNumber(task_data[0], 2));
+                    publishProgress("" + doubleToDegree(task_data[0]));
                 }
             }
             return task_data;
@@ -205,7 +205,7 @@ public class VysCalibrActivity extends Activity implements View.OnClickListener,
             super.onPostExecute(doubles);
 
             heightView.setText("" + roundNumber(doubles[1], 2));
-            angleView.setText("" + doubles[0]);
+            angleView.setText("" + doubleToDegree(doubles[0]));
 
             Intent intent = new Intent();
             intent.putExtra("eyeLength",dialog.eyeLength);
@@ -218,7 +218,13 @@ public class VysCalibrActivity extends Activity implements View.OnClickListener,
             finish();
         }
     }
-
+    public static String doubleToDegree(double value){
+        int degree = (int) value;
+        double rawMinute = Math.abs((value % 1) * 60);
+        int minute = (int) rawMinute;
+        int second = (int) Math.round((rawMinute % 1) * 60);
+        return String.format("%d° %d′ %d″", degree,minute,second);
+    }
     public void stopTask() {
         task.stopTask();
     }

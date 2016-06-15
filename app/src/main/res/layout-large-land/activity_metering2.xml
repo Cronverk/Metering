@@ -10,7 +10,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:background="@drawable/arrow2"
-        android:layout_height="70dp">
+        android:layout_height="50dp">
 
     </android.support.v7.widget.Toolbar>
 
@@ -20,7 +20,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Висота"
         android:id="@+id/textView10"
-        android:textSize="50dp"
+        android:textSize="35sp"
         android:layout_above="@+id/angleValue"
         android:layout_alignLeft="@+id/heightValue"
         android:layout_alignStart="@+id/heightValue" />
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/heightValue"
-        android:textSize="120dp"
+        android:textSize="90sp"
         android:text="00.00"
         android:layout_below="@+id/textView10"
         android:layout_alignParentRight="true"
@@ -44,7 +44,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Вертикальний Кут "
         android:id="@+id/textView"
-        android:textSize="50dp"
+        android:textSize="35sp"
         android:layout_below="@+id/toolbar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -55,7 +55,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="00.00"
         android:id="@+id/angleValue"
-        android:textSize="100dp"
+        android:textSize="70sp"
         android:layout_below="@+id/textView"
         android:layout_alignLeft="@+id/layer"
         android:layout_alignStart="@+id/layer" />
@@ -78,7 +78,7 @@
         android:id="@+id/buttonUpdate"
         android:layout_above="@+id/buttonChange"
         android:layout_centerHorizontal="true"
-        android:textSize="50dp"
+        android:textSize="35sp"
         style="@style/AlertDialog.AppCompat"
         android:nestedScrollingEnabled="false"
         android:onClick="onClick" />
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:text="Змiнити даннi"
         android:id="@+id/buttonChange"
-        android:textSize="50dp"
+        android:textSize="35sp"
         android:onClick="onClick"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

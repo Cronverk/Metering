@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Висотомір базисний</string>
+    <string name="app_name">Висотомір ЕВ-1</string>
     <string name="action_calibration">Калібрування</string>
     <string name="action_help">Правила вимiрювання</string>
     <string name="angle_str">Вертикальний Кут</string>

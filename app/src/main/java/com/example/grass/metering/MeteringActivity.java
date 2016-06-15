@@ -6,29 +6,23 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.OrientationEventListener;
-import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -40,7 +34,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import static com.example.grass.metering.Constants.*;
+import static com.example.grass.metering.Constants.TAG;
+import static com.example.grass.metering.Constants.VAL;
 
 
 public class MeteringActivity extends AppCompatActivity implements View.OnClickListener, SensorEventListener,
@@ -72,6 +67,7 @@ public class MeteringActivity extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         spAccurate = getSharedPreferences("ACCURATE", MODE_PRIVATE);
 
+        //checkDate();
 
         sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         sp.setOnLoadCompleteListener(this);
@@ -318,7 +314,7 @@ public class MeteringActivity extends AppCompatActivity implements View.OnClickL
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Незареєстрована копія")
-                .setMessage("Для покупки перейдіть на сайт видавця та повідомте цей номер " + imei + ".")
+                .setMessage("Для реєстрації зателефонуйте за одним з цих номерів: \n(0572) 94-96-42, \n(050) 400-83-41, \n(097) 529-67-78. \nТа повідомте цей номер " + imei + ".")
                 .setCancelable(false);
         builder.setNegativeButton("Відмова", new DialogInterface.OnClickListener() {
             @Override
@@ -326,14 +322,14 @@ public class MeteringActivity extends AppCompatActivity implements View.OnClickL
                 finish();
             }
         });
-        builder.setPositiveButton("На сайт", new DialogInterface.OnClickListener() {
+      /*  builder.setPositiveButton("На сайт", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.lesovod.com.ua"));
                 startActivity(browserIntent);
             }
         });
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+     */   builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
                 finish();

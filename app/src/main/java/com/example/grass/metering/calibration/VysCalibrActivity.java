@@ -222,8 +222,7 @@ public class VysCalibrActivity extends Activity implements View.OnClickListener,
         int degree = (int) value;
         double rawMinute = Math.abs((value % 1) * 60);
         int minute = (int) rawMinute;
-        int second = (int) Math.round((rawMinute % 1) * 60);
-        return String.format("%d° %d′ %d″", degree,minute,second);
+        return String.format("%d° %d′ ", degree,minute);
     }
     public void stopTask() {
         task.stopTask();

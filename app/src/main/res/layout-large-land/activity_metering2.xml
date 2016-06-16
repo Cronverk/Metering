@@ -9,8 +9,13 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:background="@drawable/arrow2"
         android:layout_height="50dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/arrow2"/>
 
     </android.support.v7.widget.Toolbar>
 
@@ -22,8 +27,9 @@
         android:id="@+id/textView10"
         android:textSize="35sp"
         android:layout_above="@+id/angleValue"
-        android:layout_alignLeft="@+id/heightValue"
-        android:layout_alignStart="@+id/heightValue" />
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,10 +70,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="m"
+        android:text="м"
         android:id="@+id/textView3"
-        android:textSize="35dp"
-        android:layout_alignTop="@+id/heightValue"
+        android:textSize="35sp"
+        android:layout_alignBottom="@+id/angleValue"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

@@ -55,9 +55,9 @@ public class ItemAdapter extends BaseAdapter {
         Item item = list.get(position);
         viewItem = inflater.inflate(R.layout.item, null);
                ((TextView) viewItem.findViewById(R.id.text2)).setText(doubleToDegree(item.getAngle()));
-        ((TextView) viewItem.findViewById(R.id.text3)).setText(""+item.getMeger()+"м");
-        ((TextView) viewItem.findViewById(R.id.text4)).setText(""+item.getuMerge()+"м");
-        ((TextView) viewItem.findViewById(R.id.text5)).setText(""+Math.abs(item.getError())*100);
+        ((TextView) viewItem.findViewById(R.id.text3)).setText(""+item.getMeger()+" м");
+        ((TextView) viewItem.findViewById(R.id.text4)).setText(""+item.getuMerge()+" м");
+        ((TextView) viewItem.findViewById(R.id.text5)).setText(""+Math.abs(item.getError())*100+" %");
         if(position%2==0)
             viewItem.setBackgroundColor(0xFFECF0F1);
         return viewItem;

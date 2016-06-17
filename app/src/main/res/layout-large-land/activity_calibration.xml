@@ -24,7 +24,8 @@
         android:id="@+id/textView4"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="30dp" />
+        android:textSize="30dp"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,7 +35,8 @@
         android:layout_below="@+id/textView4"
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
-        android:textColor="#030303"/>
+        android:textColor="#030303"
+        android:visibility="visible" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -79,5 +81,15 @@
             android:textSize="30sp"
             android:layout_weight="0.31"/>
     </LinearLayout>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0.03%"
+        android:textSize="30sp"
+        android:id="@+id/textView3"
+        android:layout_marginLeft="16dp"
+        android:layout_above="@+id/listView"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
 </RelativeLayout>

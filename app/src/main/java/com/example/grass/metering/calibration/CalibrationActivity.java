@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.grass.metering.R;
 import com.example.grass.metering.list.Item;
@@ -25,6 +26,10 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
     int itemPoistion = 0;
     Context context;
     ListView view;
+    TextView text1;
+    TextView textAc;
+    TextView textAvalue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,10 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             colibrCount = Integer.parseInt(spAccurate.getString("colibrCount",""));
 
         importAccuracy(colibrCount);
+
+        text1       = (TextView) findViewById(R.id.textView4);
+        textAc      = (TextView) findViewById(R.id.textView2);
+        textAvalue  = (TextView) findViewById(R.id.textView3);
 
         view = (ListView)findViewById(R.id.listView);
         if(view!=null)
@@ -130,24 +139,36 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
     private double countDisp(){
         double sum  = 0;
         double disp = 0;
+        if(list.size() == 1)
+            return list.get(0).getError()/list.size();
         for(Item item : list)
             sum += item.getError()/list.size();
-        for(Item item : list){
+       /* for(Item item : list){
             disp+=Math.pow(item.getError() - sum,2)/list.size();
-        }
-        return disp;
+
+        }*/
+        return sum;
     }
     public double roundNumber(double number, double accurancy) {
         accurancy = Math.pow(10, accurancy);
         number = Math.round(number * accurancy);
-
         return number / accurancy;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(list.size()>0)
-            view.setSelection(list.size()-1);
+        if(list.size()>0) {
+            view.setSelection(list.size() - 1);
+            text1.setVisibility(View.VISIBLE);
+            textAc.setVisibility(View.VISIBLE);
+            textAvalue.setText(""+roundNumber(countDisp()*100,2)+" %");
+            textAvalue.setVisibility(View.VISIBLE);
+        }
+        else{
+            text1.setVisibility(View.GONE);
+            textAc.setVisibility(View.GONE);
+            textAvalue.setVisibility(View.GONE);
+        }
     }
 }

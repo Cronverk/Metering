@@ -24,6 +24,7 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
     SharedPreferences spAccurate;
     int itemPoistion = 0;
     Context context;
+    ListView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +44,15 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
 
         importAccuracy(colibrCount);
 
-        ListView view = (ListView)findViewById(R.id.listView);
+        view = (ListView)findViewById(R.id.listView);
         if(view!=null)
         view.setAdapter(adapter);
-        Button but  = (Button)findViewById(R.id.button4);
-        but.setOnClickListener(this);
+        (findViewById(R.id.button4)).setOnClickListener(this);
+        (findViewById(R.id.button3)).setOnClickListener(this);
+        (findViewById(R.id.button2)).setOnClickListener(this);
+
+
+
         view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -71,6 +76,9 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
                 editor.commit();
                 finish();
                 break;
+            case R.id.button3:
+                finish();
+                break;
         }
     }
 
@@ -88,8 +96,8 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             double accurate = roundNumber(1-(height/eyeHeight),2);
 
             adapter.notifyDataSetChanged();
-            list.add(new Item(eyeLength,height,angle,eyeHeight,accurate));
-            addAccuracy(++colibrCount, angle, eyeHeight, eyeLength, accurate, height);
+            list.add(new Item(eyeLength,height,angle,eyeHeight,roundNumber(accurate,2)));
+            addAccuracy(++colibrCount, angle, eyeHeight, eyeLength, roundNumber(accurate,2), height);
             Log.d("log","angle = "+angle+"height = "+height);
         }
     }
@@ -104,9 +112,8 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             if(id>colibrCount)
                 colibrCount++;
             editor.putString("colibrCount",""+colibrCount);
-            editor.putString("accurate",""+countDisp());
+            editor.putString("accurate",""+roundNumber(countDisp(),2));
         editor.commit();
-        editor = spAccurate.edit();
     }
     private void importAccuracy(int count){
 
@@ -135,5 +142,12 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
         number = Math.round(number * accurancy);
 
         return number / accurancy;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(list.size()>0)
+            view.setSelection(list.size()-1);
     }
 }

@@ -49,6 +49,7 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setCancelable(false);
 
 
     }

@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:onClick="onClick">
+    android:onClick="onClick"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin">
 
     <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -37,16 +39,14 @@
         android:textSize="60sp"
         android:text="00.00"
         android:layout_below="@+id/textView10"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp" />
+        android:layout_toLeftOf="@+id/textView3"
+        android:layout_toStartOf="@+id/textView3"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Вертикальний Кут "
+        android:text="@string/angle_str"
         android:id="@+id/textView"
         android:textSize="35dp"
         android:layout_below="@+id/toolbar"
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="м"
+        android:text="@string/meter"
         android:id="@+id/textView3"
         android:textSize="35dp"
         android:layout_alignBottom="@+id/heightValue"
@@ -91,7 +91,7 @@
         style="@style/AlertDialog.AppCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Змiнити даннi"
+        android:text="@string/change_data"
         android:id="@+id/buttonChange"
         android:textSize="35sp"
         android:onClick="onClick"

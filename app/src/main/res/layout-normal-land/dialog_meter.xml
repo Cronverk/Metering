@@ -26,12 +26,13 @@
         android:focusable="true"
         android:visibility="visible"
         android:layout_below="@+id/textView5"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="@string/dial_str2"/>
 
     <Button
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Розрахувати"
+        android:text="@string/get_distanse"
         android:id="@+id/button"
         android:layout_below="@+id/editLength"
         android:layout_centerHorizontal="true"
@@ -59,7 +60,8 @@
         android:focusable="true"
         android:visibility="visible"
         android:layout_below="@+id/textView11"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:hint="@string/dial_str1"/>
 
 
 </RelativeLayout>

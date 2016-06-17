@@ -86,7 +86,7 @@
         android:id="@+id/buttOwnResult"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:text="Власне значення вiдстаннi"
+        android:text="@string/owv_distanse"
         android:visibility="visible"
         style="@style/AlertDialog.AppCompat"
         android:textSize="30sp"

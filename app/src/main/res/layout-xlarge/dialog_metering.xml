@@ -76,7 +76,7 @@
             android:id="@+id/buttSaveOwn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Розрахувати"
+            android:text="@string/get_distanse"
             android:layout_gravity="center_horizontal"
             android:textSize="30dp"
             style="@style/AlertDialog.AppCompat" />

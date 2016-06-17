@@ -92,14 +92,4 @@
         android:layout_alignLeft="@+id/text4"
         android:layout_alignStart="@+id/text4" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="%"
-        android:id="@+id/textView18"
-        android:layout_alignTop="@+id/text5"
-        android:layout_toRightOf="@+id/text5"
-        android:layout_toEndOf="@+id/text5"
-        android:textSize="35dp" />
 </RelativeLayout>

@@ -37,6 +37,7 @@ public class VysCalibrDialog extends DialogFragment implements View.OnClickListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setCancelable(false);
     }
 
     @Override

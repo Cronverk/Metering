@@ -57,4 +57,9 @@ public class Item {
     public void setError(Double error) {
         this.error = error;
     }
+
+
+    public double getPercent(){
+        return getError()*100/getMeger();
+    }
 }

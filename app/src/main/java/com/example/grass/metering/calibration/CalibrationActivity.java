@@ -102,7 +102,7 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             height = data.getDoubleExtra("height",height);
             eyeLength = data.getDoubleExtra("eyeLength",eyeLength);
             eyeHeight = data.getDoubleExtra("eyeHeight",eyeHeight);
-            double accurate = roundNumber(1-(height/eyeHeight),2);
+            double accurate = roundNumber(eyeHeight-height,2);
 
             adapter.notifyDataSetChanged();
             list.add(new Item(eyeLength,height,angle,eyeHeight,roundNumber(accurate,2)));
@@ -162,8 +162,10 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             view.setSelection(list.size() - 1);
             text1.setVisibility(View.VISIBLE);
             textAc.setVisibility(View.VISIBLE);
-            textAvalue.setText(""+roundNumber(countDisp()*100,2)+" %");
+            //textAvalue.setText("0.0 м");
             textAvalue.setVisibility(View.VISIBLE);
+            //if(list.size()>1)
+                textAvalue.setText(""+roundNumber(countDisp(),2)+" м");
         }
         else{
             text1.setVisibility(View.GONE);

@@ -5,7 +5,7 @@
     <string name="angle_str">Вертикальний кут</string>
     <string name="dialog_title">Висота до рiвня очей</string>
     <string name="dial_str1">Відстань до дерева, (м)</string>
-    <string name="dial_str2">Висота дерева, (м)</string>
+    <string name="dial_str2">Істина висота дерева, (м)</string>
     <string name="togle1_str">Базисна вiдстань 20 м</string>
     <string name="togle2_str">Базисна вiдстань 30 м</string>
     <string name="line1">НВПП \"КАРО\" м.Харкiв </string>
@@ -31,9 +31,9 @@
     <string name="owv_distanse">Власне значення відстані</string>
     <string name="get_distanse">Виміряти висоту</string>
     <string name="change_data">Змінити дані</string>
-    <string name="measured_hieght">Визначена висота</string>
+    <string name="measured_hieght">Виміряна висота</string>
     <string name="real_hieght">Істинна висота</string>
-    <string name="avarage_mistake">Середня поправка</string>
+    <string name="avarage_mistake">Середньозважена поправка</string>
     <string name="finish_calibration">Завершити калібрування</string>
     <string name="mesuare_height">Вимірювання висоти</string>
     <string name="meter">М</string>

@@ -168,11 +168,14 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             text0.setVisibility(View.VISIBLE);
             textAc.setVisibility(View.VISIBLE);
             //textAvalue.setText("0.0 м");
-            textAvalue.setVisibility(View.VISIBLE);
+
             textCnt.setVisibility(View.VISIBLE);
             textCnt.setText(""+list.size());
-            if(list.size()>1)
-                textAvalue.setText(""+roundNumber(countDisp(),2)+" м");
+            textAvalue.setVisibility(View.VISIBLE);
+            //if(list.size()>1) {
+
+                textAvalue.setText("" + roundNumber(countDisp(), 2) + " м");
+            //}
         }
         else{
             text1.setVisibility(View.GONE);

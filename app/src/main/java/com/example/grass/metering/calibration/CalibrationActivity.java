@@ -41,14 +41,16 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
         list= new ArrayList<Item>();
         adapter = new ItemAdapter(this,list);
         spAccurate = getSharedPreferences("ACCURATE", MODE_PRIVATE);
-
+/*
         if(spAccurate.contains("colibrCount")!=true) {
             spAccurate.edit().putString("colibrCount", "0");
             spAccurate.edit().apply();
         }
         else
             colibrCount = Integer.parseInt(spAccurate.getString("colibrCount",""));
+*/
 
+        colibrCount  = spAccurate.getInt("colibrCount", 0);
         importAccuracy(colibrCount);
 
         text1       = (TextView) findViewById(R.id.textView4);
@@ -124,7 +126,7 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             editor.putString("height"+id,""+height);
             if(id>colibrCount)
                 colibrCount++;
-            editor.putString("colibrCount",""+colibrCount);
+            editor.putInt("colibrCount",colibrCount);
             editor.putString("accurate",""+roundNumber(countDisp(),2));
         editor.commit();
     }
@@ -135,7 +137,7 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             double eyeLength = Double.parseDouble(spAccurate.getString("eyeLength"+i,""));
             double eyeHeight = Double.parseDouble(spAccurate.getString("eyeHeight"+i,""));
             double accurate = Double.parseDouble(spAccurate.getString("accurate"+i,""));
-            double length = Double.parseDouble(spAccurate.getString("length"+i,""));
+            double length = Double.parseDouble(spAccurate.getString("height"+i,""));
             list.add(new Item(eyeHeight,length,angle,eyeLength,accurate));
         }
     }

@@ -67,7 +67,7 @@ public class MeteringActivity extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         spAccurate = getSharedPreferences("ACCURATE", MODE_PRIVATE);
 
-        checkDate();
+ //       checkDate();
 
         sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         sp.setOnLoadCompleteListener(this);
@@ -372,9 +372,9 @@ public class MeteringActivity extends AppCompatActivity implements View.OnClickL
 
         int id = item.getItemId();
         if (id == R.id.action_calibration) {
-            SharedPreferences.Editor editor = spAccurate.edit();
+            /*SharedPreferences.Editor editor = spAccurate.edit();
             editor.clear();
-            editor.commit();
+            editor.commit();*/
             stopTask();
 
             Intent intent = new Intent(this, CalibrationActivity.class);

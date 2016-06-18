@@ -38,9 +38,7 @@
         android:id="@+id/heightValue"
         android:textSize="180sp"
         android:text="00.00"
-        android:layout_marginRight="55dp"
-        android:layout_marginEnd="55dp"
-        android:layout_alignTop="@+id/angleValue"
+        android:layout_below="@+id/textView10"
         android:layout_toLeftOf="@+id/textView3"
         android:layout_toStartOf="@+id/textView3" />
 
@@ -63,8 +61,8 @@
         android:id="@+id/angleValue"
         android:textSize="160sp"
         android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/layer"
-        android:layout_alignStart="@+id/layer" />
+        android:layout_toRightOf="@+id/layer"
+        android:layout_toEndOf="@+id/layer" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,7 +73,9 @@
         android:textSize="70sp"
         android:layout_alignBottom="@+id/angleValue"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:visibility="visible"
+        android:layout_marginBottom="8dp" />
 
     <Button
         android:layout_width="match_parent"

@@ -39,6 +39,7 @@
     <string name="finish_calibration">Завершити калібрування</string>
     <string name="mesuare_height">Вимірювання висоти</string>
     <string name="meter">М</string>
+    <string name="title_count">Кiлькiсть вимiрювань</string>
 
 
 </resources>

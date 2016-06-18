@@ -68,11 +68,11 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/meter"
         android:id="@+id/textView3"
-        android:textSize="50sp"
+        android:textSize="60sp"
         android:layout_alignBottom="@+id/angleValue"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="41dp" />
+        android:layout_marginBottom="30dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"

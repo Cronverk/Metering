@@ -29,6 +29,8 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
     TextView text1;
     TextView textAc;
     TextView textAvalue;
+    TextView text0;
+    TextView textCnt;
 
 
     @Override
@@ -52,6 +54,8 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
         text1       = (TextView) findViewById(R.id.textView4);
         textAc      = (TextView) findViewById(R.id.textView2);
         textAvalue  = (TextView) findViewById(R.id.textView3);
+        text0  = (TextView) findViewById(R.id.textView0);
+        textCnt  = (TextView) findViewById(R.id.textView1);
 
         view = (ListView)findViewById(R.id.listView);
         if(view!=null)
@@ -161,16 +165,21 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
         if(list.size()>0) {
             view.setSelection(list.size() - 1);
             text1.setVisibility(View.VISIBLE);
+            text0.setVisibility(View.VISIBLE);
             textAc.setVisibility(View.VISIBLE);
             //textAvalue.setText("0.0 м");
             textAvalue.setVisibility(View.VISIBLE);
-            //if(list.size()>1)
+            textCnt.setVisibility(View.VISIBLE);
+            textCnt.setText(""+list.size());
+            if(list.size()>1)
                 textAvalue.setText(""+roundNumber(countDisp(),2)+" м");
         }
         else{
             text1.setVisibility(View.GONE);
             textAc.setVisibility(View.GONE);
             textAvalue.setVisibility(View.GONE);
+            text0.setVisibility(View.GONE);
+            textCnt.setVisibility(View.GONE);
         }
     }
 }

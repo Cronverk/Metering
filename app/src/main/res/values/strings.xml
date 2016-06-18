@@ -5,9 +5,9 @@
     <string name="angle_str">Вертикальний кут</string>
     <string name="dialog_title">Висота до рiвня очей</string>
     <string name="dial_str1">Відстань до дерева, (м)</string>
-    <string name="dial_str2">Істина висота дерева, (м)</string>
-    <string name="togle1_str">Базисна вiдстань 20 м</string>
-    <string name="togle2_str">Базисна вiдстань 30 м</string>
+    <string name="dial_str2">Висота дерева, (м)</string>
+    <string name="togle1_str">Базисна вiдстань 20м</string>
+    <string name="togle2_str">Базисна вiдстань 30м</string>
     <string name="line1">НВПП \"КАРО\" м.Харкiв </string>
     <string name="line2">сайт \"Все для лiсiвника\"</string>
     <string name="line3"> <u>lesovod.com.ua</u></string>
@@ -16,27 +16,30 @@
     <string name="line6"><u>097-529-67-78</u></string>
 
     <string name="calc_help1">1. Ввести висоту до рiвня очей.</string>
-    <string name="calc_help2">2. Вибрати необхiдну базисну вiдстань, або ввести будь-яку реальну вiдстань
+    <string name="calc_help2">2. Вибрати необхiдну базисну вiдстань, ввести будь-яку реальну вiдстань
         до дерева, висоту якого треба визначити.</string>
-    <string name="calc_help3">3. Вимірювання висоти проводити так, щоб стрілка на екрані вказувала на вершину дерева.
+    <string name="calc_help3">3. Вимірювання висоти проводититак, щоб стрілка на екрані вказувала на вершину дерева.
         Візирування на вершину слід проводити по верхній кромці мобільного пристрою.</string>
-    <string name="calc_help4">4. Натиснути на будьяку точку екрану пристрою, для отримання результату
+    <string name="calc_help4">4. Натиснути на екран пристрою, для отримання результату
         вимiрювання.</string>
     <string name="calib_help1">1. У правому верхньому кутку екрана вибрати пункт меню
-        \"Калiбрування\" та натиснути на нього.</string>
+        \"Калiбрування\" та натиснути на ньго.</string>
     <string name="calib_help2">2. Шоб ввести поправку на висоту, треба натиснути на кнопку
-        \"Додати вимірювання\" та виконати вимiрювання висоти. </string>
+        \"Додати вимірювання\" та виконаи вимiрювання висоти.
+        значення калiбровки, треба натиснути кнопку - Додати калiбрування,та виконувти наступнi
+        кроки описані у пунктi вимiрювання.  </string>
     <string name="calib_help3">3. Щоб прибрати внесену поправку на висоту, треба натиснути на
         кнопку - \"Вiдмiнити поправку\".</string>
     <string name="owv_distanse">Власне значення відстані</string>
     <string name="get_distanse">Виміряти висоту</string>
     <string name="change_data">Змінити дані</string>
-    <string name="measured_hieght">Виміряна висота</string>
-    <string name="real_hieght">Істинна висота</string>
-    <string name="avarage_mistake">Середньозважена поправка</string>
+    <string name="measured_hieght">Визначена висота</string>
+    <string name="real_hieght">Істина висота</string>
+    <string name="avarage_mistake">Середня поправка</string>
     <string name="finish_calibration">Завершити калібрування</string>
     <string name="mesuare_height">Вимірювання висоти</string>
     <string name="meter">М</string>
+    <string name="title_count">Кiлькiсть вимiрювань</string>
     <string name="mistake">Похибка</string>
     <string name="test_data">Тестові данні</string>
 

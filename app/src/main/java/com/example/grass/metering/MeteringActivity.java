@@ -67,7 +67,7 @@ public class MeteringActivity extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         spAccurate = getSharedPreferences("ACCURATE", MODE_PRIVATE);
 
- //       checkDate();
+        checkDate();
 
         sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
         sp.setOnLoadCompleteListener(this);

@@ -15,3 +15,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-dontwarn com.dropbox.**
+-dontwarn com.fasterxml.**
+-keepclasseswithmembernames class * {
+    native <methods>;
+}

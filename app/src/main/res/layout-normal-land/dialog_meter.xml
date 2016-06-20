@@ -27,7 +27,8 @@
         android:visibility="visible"
         android:layout_below="@+id/textView5"
         android:layout_centerHorizontal="true"
-        android:hint="@string/dial_str2"/>
+        android:hint="@string/dial_str2"
+        android:selectAllOnFocus="true"/>
 
     <Button
         android:layout_width="300dp"
@@ -61,7 +62,8 @@
         android:visibility="visible"
         android:layout_below="@+id/textView11"
         android:layout_centerHorizontal="true"
-        android:hint="@string/dial_str1"/>
+        android:hint="@string/dial_str1"
+        android:selectAllOnFocus="true"/>
 
 
 </RelativeLayout>

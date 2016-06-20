@@ -376,8 +376,8 @@ public class MeteringActivity extends AppCompatActivity implements View.OnClickL
             editor.clear();
             editor.commit();*/
             stopTask();
-
             Intent intent = new Intent(this, CalibrationActivity.class);
+            intent.putExtra("u_height",""+dialog.height);
             startActivity(intent);
             return true;
         }

@@ -31,6 +31,7 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
     TextView textAvalue;
     TextView text0;
     TextView textCnt;
+    Double u_height;
 
 
     @Override
@@ -41,6 +42,8 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
         list= new ArrayList<Item>();
         adapter = new ItemAdapter(this,list);
         spAccurate = getSharedPreferences("ACCURATE", MODE_PRIVATE);
+
+        u_height = Double.parseDouble(getIntent().getStringExtra("u_height"));
 /*
         if(spAccurate.contains("colibrCount")!=true) {
             spAccurate.edit().putString("colibrCount", "0");
@@ -86,6 +89,7 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
                 startActivityForResult(intent,1);
                 break;
             case R.id.button2:
+                VysCalibrDialog.clear();
                 SharedPreferences.Editor editor = spAccurate.edit();
                 editor.clear();
                 editor.commit();
@@ -108,7 +112,7 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             height = data.getDoubleExtra("height",height);
             eyeLength = data.getDoubleExtra("eyeLength",eyeLength);
             eyeHeight = data.getDoubleExtra("eyeHeight",eyeHeight);
-            double accurate = roundNumber(eyeHeight-height,2);
+            double accurate = roundNumber(eyeHeight+u_height-height,2);
 
             adapter.notifyDataSetChanged();
             list.add(new Item(eyeLength,height,angle,eyeHeight,roundNumber(accurate,2)));

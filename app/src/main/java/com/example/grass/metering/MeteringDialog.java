@@ -36,8 +36,8 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
     Button saveButton;
 
 
-    private double height;
-    private double length;
+    public double height;
+    public double length;
 
     HashMap<String,Double> map;
 
@@ -119,10 +119,11 @@ public class MeteringDialog extends DialogFragment implements View.OnClickListen
         double   id     = 0;
 
         Map map = mSettings.getAll();
-        height  = Double.valueOf(""+map.get("height"));
-        length  = Double.valueOf(""+map.get("length"));
-        id      = Double.valueOf(""+ map.get("id"));
-
+        try {
+            height = Double.valueOf("" + map.get("height"));
+            length = Double.valueOf("" + map.get("length"));
+            id = Double.valueOf("" + map.get("id"));
+        }catch (Exception e){}
         HashMap<String,Double> data = null;
         if(height != 0 && length !=0 ) {
             data = new HashMap();

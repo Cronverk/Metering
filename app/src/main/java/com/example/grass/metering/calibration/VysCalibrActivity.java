@@ -37,7 +37,6 @@ public class VysCalibrActivity extends Activity implements View.OnClickListener,
 
     MeteringTask task;
 
-
     Sensor accelerometer;
     SoundPool sp;
     int sound;
@@ -116,7 +115,6 @@ public class VysCalibrActivity extends Activity implements View.OnClickListener,
 
         return values;
     }
-
     public boolean checkRotate(float angle) {
         if (Math.abs(angle) > 60 && Math.abs(angle) < 115) {
             return true;
@@ -140,7 +138,6 @@ public class VysCalibrActivity extends Activity implements View.OnClickListener,
         }
         return task_data;
     }
-
     public double averageAngle() {
         double sum = 0;
         for (double value : angles)
@@ -232,12 +229,11 @@ public class VysCalibrActivity extends Activity implements View.OnClickListener,
         task = new MeteringTask();
         task.execute(height);
     }
-
-
     public double roundNumber(double number, double accurancy) {
         accurancy = Math.pow(10, accurancy);
         number = Math.round(number * accurancy);
 
         return number / accurancy;
     }
+
 }

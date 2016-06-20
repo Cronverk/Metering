@@ -109,10 +109,10 @@ public class CalibrationActivity extends Activity implements View.OnClickListene
             double eyeLength = 0.0;
             double eyeHeight= 0.0;
             angle = data.getDoubleExtra("angle",angle);
-            height = data.getDoubleExtra("height",height);
+            height = data.getDoubleExtra("height",height)+u_height;
             eyeLength = data.getDoubleExtra("eyeLength",eyeLength);
             eyeHeight = data.getDoubleExtra("eyeHeight",eyeHeight);
-            double accurate = roundNumber(eyeHeight+u_height-height,2);
+            double accurate = roundNumber(eyeHeight-height,2);
 
             adapter.notifyDataSetChanged();
             list.add(new Item(eyeLength,height,angle,eyeHeight,roundNumber(accurate,2)));
